@@ -146,14 +146,6 @@ public class DAOFactory extends SQLiteOpenHelper {
                         params.put(wordColumn, fields[4]);
                         params.put(clueColumn, fields[5]);
 
-                        Log.i("DAO FACTORY", "CLUE : " + fields[5]);
-
-                        /*
-
-                        INSERT YOUR CODE HERE
-
-                        */
-
                         Word newWord = new Word(params);
 
                         int id = wordDAO.create(db, newWord);

@@ -118,10 +118,6 @@ public class PuzzleDAO {
 
             ArrayList<Word> words = wordDao.list(db, puzzleid);
 
-            for (Word w : words) {
-                Log.i("PUZZLE DAO", "WORD : " + w.toString());
-            }
-
             if ( !words.isEmpty() )
                 puzzle.addWordsToPuzzle(words);
 

@@ -47,8 +47,6 @@ public class ClueFragment extends Fragment implements AbstractView {
 
         if (name.equals(CrosswordMagicController.PUZZLE_CLUES_PROPERTY)) {
             String[] clues = (String[])value;
-            Log.i("CLUE FRAGMENT", "CLUES ACROSS : " + clues[0]);
-            Log.i("CLUE FRAGMENT", "CLUES DOWN: " + clues[1]);
             binding.aContainer.setText(clues[0]);
             binding.dContainer.setText(clues[1]);
         }

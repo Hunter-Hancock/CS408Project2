@@ -48,7 +48,7 @@ public class CrosswordMagicModel extends AbstractModel {
             firePropertyChange(CrosswordMagicController.GRID_GUESS_PROPERTY, null, "Incorrect");
             return;
         }
-        Log.i("MODEL", "BOX : " + box + " | DIRECTION : " + dir);
+
         puzzle.addWordToGuessed(box + dir.toString());
         firePropertyChange(CrosswordMagicController.GRID_GUESS_PROPERTY, null, "Correct");
     }

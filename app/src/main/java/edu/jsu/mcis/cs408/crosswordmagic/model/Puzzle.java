@@ -101,7 +101,6 @@ public class Puzzle {
 
         if (word.isAcross()) {
             cluesAcrossBuffer.append(word.getBox()).append(": ");
-            Log.i("PUZZLE CLASS", "WORD CLUE : " + word.getClue());
             cluesAcrossBuffer.append(word.getClue()).append(System.lineSeparator());
         }
 
@@ -175,8 +174,6 @@ public class Puzzle {
 
         guessed.add(key);
 
-        Log.i("PUZZLE", "GETTING HERE | KEY : " + key);
-
         /* get word properties */
 
         int row = w.getRow();
@@ -187,16 +184,12 @@ public class Puzzle {
         /* place letters in letter grid */
 
         for (int i = 0; i < length; ++i) {
-            Log.i("PUZZLE", "GETTING HERE");
-
             letters[row][column] = word.charAt(i);
 
             if (w.isAcross()) {
-                Log.i("PUZZLE", "GETTING HERE | " + w);
                 column++;
             }
             else if (w.isDown()) {
-                Log.i("PUZZLE", "GETTING HERE | " + w);
                 row++;
             }
 
