@@ -1,7 +1,6 @@
 package edu.jsu.mcis.cs408.crosswordmagic.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
@@ -13,12 +12,15 @@ public class CrosswordMagicModel extends AbstractModel {
 
     private Puzzle puzzle;
 
+    private PuzzleListItem[] puzzle_list;
+
     public CrosswordMagicModel(Context context) {
 
         DAOFactory daoFactory = new DAOFactory(context);
         PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
 
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
+        this.puzzle_list = puzzleDAO.list();
     }
 
     public void getGridDimension() {
@@ -37,6 +39,10 @@ public class CrosswordMagicModel extends AbstractModel {
     public void getPuzzleClues() {
         String[] clues = new String[] {puzzle.getCluesAcross(), puzzle.getCluesDown()};
         firePropertyChange(CrosswordMagicController.PUZZLE_CLUES_PROPERTY, null, clues);
+    }
+
+    public void getPuzzleList() {
+        firePropertyChange(CrosswordMagicController.PUZZLE_LIST_PROPERTY, null, this.puzzle_list);
     }
 
     public void setGridGuess(String[] g) {
