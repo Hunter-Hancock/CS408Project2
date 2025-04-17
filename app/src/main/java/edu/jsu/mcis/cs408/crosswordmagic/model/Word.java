@@ -78,6 +78,7 @@ public class Word {
         StringBuilder s = new StringBuilder();
 
         s.append("ID: ").append(id).append(", ");
+        s.append("Puzzle Id: ").append(puzzleid);
         s.append("Word: ").append(word).append(", ");
         s.append("Row/Col: ").append(row).append('/').append(column).append(", ");
         s.append("Direction: ").append(direction).append(", ");

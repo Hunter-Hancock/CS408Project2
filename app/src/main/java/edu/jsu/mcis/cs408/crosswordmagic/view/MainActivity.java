@@ -3,12 +3,10 @@ package edu.jsu.mcis.cs408.crosswordmagic.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import java.beans.PropertyChangeEvent;
 
-import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.databinding.ActivityMainBinding;
 import edu.jsu.mcis.cs408.crosswordmagic.model.CrosswordMagicModel;
@@ -40,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
         controller.addModel(model);
         controller.addView(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            controller.setPuzzleId(extras.getInt("puzzleid"));
+        }
 
         /* Get Test Property (tests MVC framework) */
 

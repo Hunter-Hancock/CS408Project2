@@ -16,9 +16,12 @@ public class PuzzleListItem {
         return id;
     }
 
-    @NonNull
-    public String toString() {
+    public String getName(){
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -15,7 +15,7 @@ import edu.jsu.mcis.cs408.crosswordmagic.databinding.ActivityWelcomeBinding;
 import edu.jsu.mcis.cs408.crosswordmagic.model.CrosswordMagicModel;
 import edu.jsu.mcis.cs408.crosswordmagic.model.PuzzleListItem;
 
-public class WelcomeActivity extends AppCompatActivity implements AbstractView, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class WelcomeActivity extends AppCompatActivity implements AbstractView, AdapterView.OnItemSelectedListener {
 
     private final String TAG = "WelcomeActivity";
 
@@ -33,7 +33,15 @@ public class WelcomeActivity extends AppCompatActivity implements AbstractView, 
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.button.setOnClickListener(this);
+        binding.button.setOnClickListener(v -> {
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("puzzleid", puzzleid);
+            startActivity(i);
+        });
+        binding.menuButton.setOnClickListener(v -> {
+            Intent i = new Intent(this, MenuActivity.class);
+            startActivity(i);
+        });
         binding.spinner.setOnItemSelectedListener(this);
 
         /* Create Controller and Model */
@@ -50,15 +58,6 @@ public class WelcomeActivity extends AppCompatActivity implements AbstractView, 
         /* Request Puzzle List */
 
         controller.getPuzzleList();
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        Intent i = new Intent(this, MainActivity.class);
-        i.putExtra("puzzleid", puzzleid);
-        startActivity(i);
 
     }
 
@@ -89,10 +88,8 @@ public class WelcomeActivity extends AppCompatActivity implements AbstractView, 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         puzzleid = ((PuzzleListItem)adapterView.getItemAtPosition(i)).getId();
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
-
 }

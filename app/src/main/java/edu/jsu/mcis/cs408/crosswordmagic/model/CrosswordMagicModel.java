@@ -2,11 +2,16 @@ package edu.jsu.mcis.cs408.crosswordmagic.model;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.PuzzleDAO;
+import edu.jsu.mcis.cs408.crosswordmagic.model.dao.WebServiceDAO;
 
 public class CrosswordMagicModel extends AbstractModel {
+
+    private DAOFactory daoFactory;
 
     private final int DEFAULT_PUZZLE_ID = 1;
 
@@ -16,9 +21,8 @@ public class CrosswordMagicModel extends AbstractModel {
 
     public CrosswordMagicModel(Context context) {
 
-        DAOFactory daoFactory = new DAOFactory(context);
+        daoFactory = new DAOFactory(context);
         PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
-
         this.puzzle = puzzleDAO.find(DEFAULT_PUZZLE_ID);
         this.puzzle_list = puzzleDAO.list();
     }
@@ -57,6 +61,17 @@ public class CrosswordMagicModel extends AbstractModel {
 
         puzzle.addWordToGuessed(box + dir.toString());
         firePropertyChange(CrosswordMagicController.GRID_GUESS_PROPERTY, null, "Correct");
+    }
+
+    public void getMenuList() {
+        WebServiceDAO web = daoFactory.getWebServiceDAO();
+        ArrayList<PuzzleListItem> items = web.list();
+        firePropertyChange(CrosswordMagicController.MENU_LIST_PROPERTY, null, items.toArray(new PuzzleListItem[] {}));
+    }
+
+    public void setPuzzleId(Integer id) {
+        PuzzleDAO puzzleDAO = daoFactory.getPuzzleDAO();
+        this.puzzle = puzzleDAO.find(id);
     }
 
     public void getTestProperty() {
